@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Vehicule\Service\Vehicule;
+namespace App\Domain\Vehicules\Service\Vehicule;
 
-use App\Domain\Vehicule\Repository\Vehicule\AjouterVehiculeRepository;
+use App\Domain\Vehicules\Repository\Vehicule\AjouterVehiculeRepository;
 use App\Exception\ValidationException;
 
 /// Service.
@@ -57,36 +57,29 @@ final class AjouterVehicule
     private function ValidationNouveauVehicule(array $data): void
     {
         $errors = [];
-        if(!isset($data['marque'])) {
-            $errors['marque'] = 'Champs requis';
+
+        // Here you can also use your preferred validation library
+
+        if (empty($data['titre'])) {
+            $errors['titre'] = 'Input required';
         }
-        if(!isset($data['models'])) {
-            $errors['models'] = 'Champs requis';
+
+        if (empty($data['description'])) {
+            $errors['description'] = 'Input required';
         }
-        if(!isset($data['prix'])) {
-            $errors['prix'] = 'Champs requis';
+        if (empty($data['duree'])) {
+            $errors['duree'] = 'Input required';
         }
-        if(!isset($data['description'])) {
-            $errors['description'] = 'Champs requis';
+        if (empty($data['date_sortie'])) {
+            $errors['date_sortie'] = 'Input required';
         }
-        if(!isset($data['image_url'])) {
-            $errors['image_url'] = 'Champs requis';
+        if (empty($data['auteur_id'])) {
+            $errors['auteur_id'] = 'Input required';
         }
-        if(!isset($data['nom_vendeur'])) {
-            $errors['nom_vendeur'] = 'Champs requis';
+        if (empty($data['dessinateur_id'])) {
+            $errors['dessinateur_id'] = 'Input required';
         }
-         if(!isset($data['adresse'])) {
-            $errors['adresse'] = 'Champs requis';
-        }
-         if(!isset($data['ville'])) {
-            $errors['ville'] = 'Champs requis';
-        }
-         if(!isset($data['courriel'])) {
-            $errors['courriel'] = 'Champs requis';
-        }
-         if(!isset($data['no_telephone'])) {
-            $errors['no_telephone'] = 'Champs requis';
-        }
+
         if ($errors) {
             throw new ValidationException('Please check your input', $errors);
         }

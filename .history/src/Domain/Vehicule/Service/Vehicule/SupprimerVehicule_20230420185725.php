@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Vehicule\Service\Vehicule;
+namespace App\Domain\Vehicules\Service\Vehicule;
 
-use App\Domain\Vehicule\Repository\Vehicule\SupprimerVehiculeRepository;
+use App\Domain\Vehicules\Repository\Vehicule\SupprimerVehiculeRepository;
 
 
  /// Service.

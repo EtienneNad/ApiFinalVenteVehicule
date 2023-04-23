@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Vehicule\Service\Vehicule;
+namespace App\Domain\Vehicules\Service\Vehicule;
 
-use App\Domain\Vehicule\Repository\Vehicule\AjouterVehiculeRepository;
+use App\Domain\Vehicules\Repository\Vehicule\AjouterVehiculeRepository;
 use App\Exception\ValidationException;
 
 /// Service.

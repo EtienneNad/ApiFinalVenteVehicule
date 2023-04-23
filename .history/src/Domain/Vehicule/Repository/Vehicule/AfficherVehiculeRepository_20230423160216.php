@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Vehicule\Repository\Vehicule;
+namespace App\Domain\Vehicules\Repository\Vehicule;
 
 use PDO;
  /// Repository.

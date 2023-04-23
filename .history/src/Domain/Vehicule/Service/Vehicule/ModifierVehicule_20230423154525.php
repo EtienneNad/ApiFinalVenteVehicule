@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\Vehicule\Service\Vehicule;
+namespace App\Domain\Vehicules\Service\Vehicule;
 
-use App\Domain\Vehicule\Repository\Vehicule\ModifierVehiculeRepository;
-use App\Domain\Vehicule\Repository\Vehicule\AfficherVehiculeRepository;
+use App\Domain\Vehicules\Repository\Vehicule\ModifierVehiculeRepository;
+use App\Domain\Vehicules\Repository\Vehicule\AfficherVehiculeRepository;
 use App\Factory\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use App\Exception\RessourceNotFoundException;

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Vehicule\Repository\Vehicule;
+namespace App\Domain\Vehicules\Repository\Vehicule;
 
 use PDO;
  /// Repository.
-class AjouterVehiculeRepository
+class ModifierVehiculeRepository
 {
    /**
      * @var PDO The database connection
@@ -20,10 +20,10 @@ class AjouterVehiculeRepository
     {
         $this->connection = $connection;
     }
-    public function InsererVehicule(array $vehicule): int
+    public function ModificationVehicule(array $vehicule): array
     {
-
         $row = [
+            'id' => $vehicule['id'],
             'marque' => $vehicule['marque'],
             'models' => $vehicule['models'],
             'prix' => $vehicule['prix'],
@@ -36,21 +36,22 @@ class AjouterVehiculeRepository
             'no_telephone' => $vehicule['no_telephone']
         ];
 
-        $sql = "INSERT INTO ventevehicule SET 
-        marque=:marque, 
-        models=:models,
-        prix=:prix,
-        description=:description, 
-        image_url=:image_url,
-        nom_vendeur=:nom_vendeur, 
-        adresse=:adresse,
-        ville=:ville,
-        courriel=:courriel,
-        no_telephone=:no_telephone;";
+        $sql = 
+            "UPDATE ventevehicule SET 
+                marque=:marque, 
+                models=:models,
+                prix=:prix,
+                description=:description, 
+                image_url=:image_url,
+                nom_vendeur=:nom_vendeur, 
+                adresse=:adresse,
+                ville=:ville,
+                courriel=:courriel,
+                no_telephone=:no_telephone
+                WHERE id =:id;";
 
         $this->connection->prepare($sql)->execute($row);
-
-        return (int)$this->connection->lastInsertId();
+        return $row;
     }
 
 }

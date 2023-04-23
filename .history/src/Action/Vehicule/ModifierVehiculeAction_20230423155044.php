@@ -2,7 +2,7 @@
 
 namespace App\Action\Vehicule;
 
-use App\Domain\Vehicule\Service\Vehicule\ModifierVehicule;
+use App\Domain\Vehicules\Service\Vehicule\ModifierVehicule;
 use App\Factory\LoggerFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
