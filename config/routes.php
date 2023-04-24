@@ -15,5 +15,9 @@ return function (App $app) {
     $app->delete('/vehicule/{id}', \App\Action\Vehicule\SupprimerVehiculeAction::class);
     $app->put('/vehicule/modif', \App\Action\Vehicule\ModifierVehiculeAction::class);
 
+    $app->post('/utilisateur', \App\Action\Utilisateur\AjouterUtilisateurAction::class);
+    $app->get('/utilisateur/all', \App\Action\Utilisateur\AfficherUtilisateurAction::class);
+    $app->delete('/utilisateur/{id}', \App\Action\Utilisateur\SupprimerUtilisateurAction::class);
+    $app->put('/utilisateur/modif', \App\Action\Utilisateur\ModifierUtilisateurAction::class);
 };
 
