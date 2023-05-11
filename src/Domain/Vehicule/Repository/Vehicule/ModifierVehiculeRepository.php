@@ -6,20 +6,23 @@ use PDO;
  /// Repository.
 class ModifierVehiculeRepository
 {
-   /**
-     * @var PDO The database connection
+  /**
+     * @var PDO La connexion à la base de données
      */
     private $connection;
-    
-     /// Constructor.
-    
-     /**
-     * @param PDO $connection The database connection
+    /**
+     * Constructeur
+     * @param PDO $connection La connexion à la base de données
      */
     public function __construct(PDO $connection)
     {
         $this->connection = $connection;
     }
+    /**
+     * Modifie un véhicule dans la base de données
+     * @param array $vehicule Le tableau contenant les données du véhicule à modifier
+     * @return array Le tableau contenant les nouvelles données du véhicule modifié
+     */
     public function ModificationVehicule(array $vehicule): array
     {
         $row = [

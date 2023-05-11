@@ -25,11 +25,11 @@ final class SupprimerUtilisateur
         $this->repository = $repository;
     }
     /**
-     * Delete an Utilisateur
+     * supprime un Utilisateur
      *
-     * @param int $data The form data
+     * @param int $data du formulaire data
      *
-     * @return array The deleted utilisateur object
+     * @return array The supprimer utilisateur object
      */
     public function UtilisateurSupprimer(int $id): array
     {

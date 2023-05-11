@@ -3,23 +3,34 @@
 namespace App\Domain\Vehicule\Repository\Vehicule;
 
 use PDO;
- /// Repository.
+
+/**
+ * Le repository pour l'ajout de véhicule
+ */
 class AjouterVehiculeRepository
 {
-   /**
-     * @var PDO The database connection
+    /**
+     * @var PDO La connexion à la base de données
      */
     private $connection;
     
-     /// Constructor.
-    
-     /**
-     * @param PDO $connection The database connection
+    /**
+     * Constructeur.
+     *
+     * @param PDO $connection La connexion à la base de données
      */
     public function __construct(PDO $connection)
     {
         $this->connection = $connection;
     }
+
+    /**
+     * Insère un nouveau véhicule dans la base de données.
+     *
+     * @param array $vehicule Les informations sur le véhicule à insérer
+     * 
+     * @return int L'identifiant de la ligne insérée
+     */
     public function InsererVehicule(array $vehicule): int
     {
 

@@ -6,26 +6,25 @@ use PDO;
  /// Repository.
 class SupprimerUtilisateurRepository
 {
-    /**
+  /**
      * @var PDO The database connection
      */
     private $connection;
     
-     /// Constructor.
-    
-     /**
-     * @param PDO $connection The database connection
+   /**
+     * Constructeur.
+     *
+     * @param PDO $connection La connexion à la base de données
      */
     public function __construct(PDO $connection)
     {
         $this->connection = $connection;
     }
     /**
-     * Delete an author by his id
+     * supprimer un utilisateur 
      *
-     * @param array $id The author id to delete
-     *
-     * @return bool Is the query succeed
+     * @param array $id c'est l'id de l'utilisateur a supprimer
+     * @return bool est l'état de de la supression
      */
     public function SupprimerUtilisateur(int $id): bool
     {

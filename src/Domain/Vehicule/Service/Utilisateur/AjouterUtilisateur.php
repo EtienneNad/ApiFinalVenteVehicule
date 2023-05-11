@@ -25,11 +25,11 @@ final class AjouterUtilisateur
         $this->repository = $repository;
     }
     /**
-     * Create a new utilisateur.
+     * Create un nouveau utilisateur.
      *
-     * @param array $data The form data
+     * @param array $data du formulaire datta
      *
-     * @return int The new utilisateur ID
+     * @return int l'id du nouveau utilisateur
      */
     public function NouveauUtilisateurCree(array $data): int
     {
@@ -40,8 +40,7 @@ final class AjouterUtilisateur
         // Insert user
         $utilisateur = $this->repository->InsererUtilisateur($data);
 
-        // Logging here: utilisateur created successfully
-        //$this->logger->info(sprintf('utilisateur created successfully: %s', $utilisateur));
+     
 
         return $utilisateur;
     }

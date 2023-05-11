@@ -23,7 +23,7 @@ final class ModifierUtilisateurAction
         // Le nom de fichier de log utilisé
         ->addFileHandler('LogModifierUtilisateur.log')
         // ON peut passer du texte en paramètre ici qui identifiera
-        // la ligne de log, sinon un UUID sera utilisé
+        // la ligne de log
         ->createLogger('MessageFromModifierUtilisateur');
     }
 

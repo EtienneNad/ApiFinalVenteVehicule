@@ -60,9 +60,9 @@ final class ModifierVehicule
     }
 
     /**
-     * Input validation.
-     *
-     * @param array $data The form data
+     * validation.
+     
+     * @param int $id id du véhicule
      *
      * @throws RessourceNotFoundException
      *
@@ -72,15 +72,15 @@ final class ModifierVehicule
     {
         $vehicule = $this->afficherRepository->SelectVehiculeId($id);
 
-        // if (empty($vehicule)) {
-        //     throw new RessourceNotFoundException("Aucun vehicule trouvé pour le id {$id}");
-        // }
+        if (empty($vehicule)) {
+             throw new RessourceNotFoundException("Aucun vehicule trouvé pour le id {$id}");
+        }
     }
 
     /**
-     * Input validation.
+     *  validation des donner.
      *
-     * @param array $data The form data
+     * @param array $data du formulaire data
      *
      * @throws ValidationException
      *

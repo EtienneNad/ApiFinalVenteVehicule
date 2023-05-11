@@ -23,7 +23,7 @@ final class AjouterVehiculeAction
         // Le nom de fichier de log utilisé
         ->addFileHandler('LogAjouterVehicule.log')
         // ON peut passer du texte en paramètre ici qui identifiera
-        // la ligne de log, sinon un UUID sera utilisé
+        // la ligne de logé
         ->createLogger('MessageFromAjouterVehicule');
     }
 
@@ -44,7 +44,7 @@ final class AjouterVehiculeAction
         // Build the HTTP response
         $reponse->getBody()->write((string)json_encode($resultat));
       
-        $this->logger->info("Le vehicule a été ajouter correctement");
+        $this->logger->info("Le vehicule a correctement été ajouter");
         return $reponse
             ->withHeader('Content-Type', 'application/json')
             ->withStatus(201);      

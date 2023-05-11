@@ -1,69 +1,471 @@
 openapi: 3.0.0
 info:
-  version: 1.0.0
-  title: Base-Slim-Skeleton
-  description: Structure de base d'un api créé dans le cadre du cours Services Web H2023
-  
+  version: '1.0'
+  title: ApiFinalVenteVehicule
+  description: Service Web
 servers: 
-  - url: http://localhost/base-slim-skeleton
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: http://localhost/ApiFinalVenteVoiture
+
+ 
 paths:
-  /:
+  /vehicule/all:
     get:
+      security:
+        - bearerAuth: [] 
       tags:
-        - Général
-      summary: Message de bienvenue
+        - Vehicules
+      summary: Afficher les vehicules
       responses:
-        '200': 
-          description: 
+        "200":
+          description: le tableau de vehicule a correctement affiché
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                    success: true
-                    message : 'Hello world!'
-  
-  /users:
+                    $ref: '#/components/schemas/TableauVehicules'
+  /vehicule:
     post:
-      tags: 
-        - Usagers
-      summary: Création d'un usager.
+      security:
+        - bearerAuth: [] 
+      tags:
+        - Vehicules
+      summary: Ajouter un vehicule
       requestBody:
-        description: Les informations de l'usager à créer
-        required: true
+        description: Information du vehicule ajouter
+        required: true 
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                first_name:
-                  type: string
-                last_name:
-                  type: string
-                email:
-                  type: string
-              example:
-                username : 'mathF'
-                first_name: 'Mathieu'
-                last_name: 'Fréchette'
-                email: 'frechette.mathieu@cegepvicto.ca'
+              $ref: '#/components/schemas/AjouterVehicule'
       responses:
-        '201': 
-          description: Le id de l'usager créé
+        '201':
+          description:  Le vehicule a correctement été ajouter
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  user_id:
-                    type: integer
-                example:
-                  id : 1
+                    $ref: '#/components/schemas/retourID'
+  /vehicule/modif:
+    put:
+      security:
+        - bearerAuth: [] 
+      tags:
+        - Vehicules
+      summary: Modification d'un véhicule déja existant
+      requestBody:
+        description: Information d'un véhicule a modifié
+        required: true 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifierVehicule'
+      
+      responses:
+        '200':
+          description: Le vehicule a été modifier
+          content:
+            application/json:
+              schema:
+                    $ref: '#/components/schemas/TableauVehicules' 
+  /vehicule/{id}:
+    delete:
+        security:
+          - bearerAuth: [] 
+           
+        tags:
+          - Vehicules
+        summary: Supprime un vehicule
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: Suppression d'un vehicule
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Le vehicule a été supprimer
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/retourMessageVehicule'
   
+  /utilisateur/all:
+    get:
+      security:
+        - bearerAuth: [] 
+      tags:
+        - Utilisateurs
+      summary: Affichage des utilisateurs
+      responses:
+        "200":
+          description: Un tableau d'utilisateur
+          content:
+            application/json:
+              schema:
+                    $ref: '#/components/schemas/TableauUtilsateur'
+  /utilisateur:
+    post:
+      security:
+        - bearerAuth: [] 
+      tags:
+        - Utilisateurs
+      summary: Ajout d'un utilisateur
+      requestBody:
+        description: L'utilisateur a correctement été ajouter
+        required: true 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AjouterUtilisateur'
+      responses:
+        '201':
+          description: L'utilisateurs a été ajouter 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/retourID'
+  /utilisateur/modif:
+    put:
+      security:
+        - bearerAuth: [] 
+      tags:
+        - Utilisateurs
+      summary: Modification d'un utilisateur déja existant
+      requestBody:
+        description: Information de l'utilisateur a modifier
+        required: true 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifierUtilisateur'
+      
+      responses:
+        '200':
+          description: L'utilisateur a été modifier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableauUtilsateur'
+  /utilisateur/{id}:
+    delete:
+      security:
+        - bearerAuth: [] 
+      tags:
+        - Utilisateurs
+      summary: Supprimer un utilisateur
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Suppression d'un utilisateur
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: L'utilisateur a été supprimer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/retourMessageUtilisateur'
+  /utilisateur/cle:
+     post:
+      tags:
+        - Utilisateurs
+      summary: Recupérer la clée d'api
+      requestBody:
+        description: La clé de l'usager a correctement afficher
+        required: true 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AfficherCle'
+      responses:
+        '201':
+          description: La clé été récupérer 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/retourCle'
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  
+  schemas:
+    retourID:
+      type: integer
+      properties:
+          id:
+            type: integer
+            format: int64
+      example: 
+          id: 1
+      items: 
+        $ref: '#/components/schemas/retourID'
+    TableauVehicules:
+      type: array
+      required:
+        - id
+        - marque
+        - model
+        - prix
+        - description
+        - image_url
+        - nomVendeur
+        - adresse
+        - ville
+        - courriel
+        - no_telephone
+      properties:
+        id:
+          type: integer
+          format: int64
+        marque:
+          type: string
+        models:
+          type: string
+        prix:
+          type: number
+          format: decimal
+        description:
+          type: string
+        image_url:
+          type: string
+        nom_vendeur:
+          type: string
+        adresse:
+          type: string
+        ville:
+          type: string
+        courriel:
+          type: string
+        no_telephone:
+          type: string   
+      example:
+          id: 1
+          marque: "marque"
+          model: "model"
+          prix: 20000.00
+          description: "description"
+          image_url: "image_url"
+          nomVendeur: "nomVendeur"
+          adresse: "adresse"
+          ville: "ville"
+          courriel: "courriel"
+          no_telephone: "no_telephone"
+          
+      items: 
+        $ref: '#/components/schemas/TableauVehicules'     
+    AjouterVehicule:
+      type: object
+      required:
+        - marque
+        - model
+        - prix
+        - description
+        - image_url
+        - nomVendeur
+        - adresse
+        - ville
+        - courriel
+        - no_telephone
+      properties:
+        marque:
+          type: string
+        models:
+          type: string
+        prix:
+          type: number
+          format: decimal
+        description:
+          type: string
+        image_url:
+          type: string
+        nom_vendeur:
+          type: string
+        adresse:
+          type: string
+        ville:
+          type: string
+        courriel:
+          type: string
+        no_telephone:
+          type: string   
+      example:
+          marque: "marque"
+          model: "model"
+          prix: 20000.00
+          description: "description"
+          image_url: "image_url"
+          nomVendeur: "nomVendeur"
+          adresse: "adresse"
+          ville: "ville"
+          courriel: "courriel"
+          no_telephone: "no_telephone"
+      items: 
+        $ref: '#/components/schemas/AjouterVehicule'
+    ModifierVehicule:
+      type: object
+      required:
+        - id
+        - marque
+        - model
+        - prix
+        - description
+        - image_url
+        - nomVendeur
+        - adresse
+        - ville
+        - courriel
+        - no_telephone
+      properties:
+        id:
+          type: integer
+          format: int64
+        marque:
+          type: string
+        models:
+          type: string
+        prix:
+          type: number
+          format: decimal
+        description:
+          type: string
+        image_url:
+          type: string
+        nom_vendeur:
+          type: string
+        adresse:
+          type: string
+        ville:
+          type: string
+        courriel:
+          type: string
+        no_telephone:
+          type: string
+      example:
+          id: 1
+          marque: "marque"
+          model: "model"
+          prix: 20000.00
+          description: "description"
+          image_url: "image_url"
+          nomVendeur: "nomVendeur"
+          adresse: "adresse"
+          ville: "ville"
+          courriel: "courriel"
+          no_telephone: "no_telephone"
+      items: 
+        $ref: '#/components/schemas/ModifierVehicule'
+    
+    
+    
+    TableauUtilsateur:
+      type: array
+      required:
+        - id
+        - username
+        - motdepasse
+        - cle
+        
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        motdepasse:
+          type: string
+        cle:
+          type: string
+        
+        
+      example:
+          id: 1
+          username: "username"
+          motdepasse: "motdepasse"
+          cle: "dXNlcm5hbWU6dGVzdCBtb3RkZXBhc3NlOnRlc3Q="
+         
+      items: 
+        $ref: '#/components/schemas/TableauUtilsateur' 
+    AjouterUtilisateur:
+      type: object
+      required: 
+       - username
+        - motdepasse
+        
+      properties:
+        username:
+          type: string
+        motdepasse:
+          type: string
+      example:
+          username: "username"
+          motdepasse: "motdepasse"
+         
+      items: 
+        $ref: '#/components/schemas/AjouterUtilisateur'
+    ModifierUtilisateur:
+      type: object
+      required:
+       - id
+        - username
+        - motdepasse
+      
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        motdepasse:
+          type: string
+        
+      example:
+          id: 1
+          username: "username"
+          motdepasse: "motdepasse"
+        
+      items: 
+        $ref: '#/components/schemas/ModifierUtilisateur'
+    AfficherCle:
+      type: object
+      required: 
+       - username
+        - motdepasse
+        
+      properties:
+        username:
+          type: string
+        motdepasse:
+          type: string
+       
+      example:
+          username: "username"
+          motdepasse: "motdepasse"
+      items: 
+        $ref: '#/components/schemas/AfficherCle'
+        
+    retourCle:
+      type: object
+      properties:
+          cle:
+            type: string
+      example: 
+          cle: "dXNlcm5hbWU6dGVzdCBtb3RkZXBhc3NlOnRlc3Q="
+      items: 
+        $ref: '#/components/schemas/retourCle'    
+    retourMessageUtilisateur:
+      type: string
+      example: 
+          "L'utilisateur a correctement été supprimer"
+      items: 
+        $ref: '#/components/schemas/retourMessageUtilisateur'
+    retourMessageVehicule:
+      type: string
+      example: 
+          "Le véhicule a correctement été supprimer"
+      items: 
+        $ref: '#/components/schemas/retourMessageVehicule'          

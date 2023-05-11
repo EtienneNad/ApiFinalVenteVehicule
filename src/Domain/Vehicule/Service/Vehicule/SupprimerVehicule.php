@@ -25,11 +25,11 @@ final class SupprimerVehicule
         $this->repository = $repository;
     }
      /**
-     * Delete an Auteur
+     * Supprime un vehicule
      *
-     * @param int $data The form data
+     * @param int $id identifiant du véhicule
      *
-     * @return array The deleted auteur object
+     * @return array Le Vehicule supprimer object
      */
     public function VehiculeSupprimer(int $id): array
     {

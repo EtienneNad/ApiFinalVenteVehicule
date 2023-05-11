@@ -47,9 +47,9 @@ final class AfficherUtilisateur
         return $utilisateur[0] ?? [];
     }
 /**
-     * Affiche un utilisateur selon son id
+     * Affiche une cle selon son username et son mots de passe
      *
-     * @return array La liste de l'utilisateurs selon son id
+     * @return array La cle de l'utilisateurs selon son username et son mots de passe
      */
     public function UtilisateurCleAfficher($username, $motdepasse): array
     {

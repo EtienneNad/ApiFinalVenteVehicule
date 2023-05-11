@@ -23,7 +23,7 @@ final class AjouterUtilisateurAction
         // Le nom de fichier de log utilisé
         ->addFileHandler('LogAjouterUtilisateur.log')
         // ON peut passer du texte en paramètre ici qui identifiera
-        // la ligne de log, sinon un UUID sera utilisé
+        // la ligne de log
         ->createLogger('MessageFromAjouterUtilisateur');
     }
 
@@ -46,7 +46,7 @@ final class AjouterUtilisateurAction
         $reponse->getBody()->write((string)json_encode($resultat));
         
         
-        $this->logger->info("L'utilisateur a été ajouter correctement");
+        $this->logger->info("L'utilisateur a correctement été ajouter ");
         return $reponse
             ->withHeader('Content-Type', 'application/json')
             ->withStatus(201);

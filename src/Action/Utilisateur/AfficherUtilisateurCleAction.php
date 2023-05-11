@@ -20,7 +20,7 @@ final class AfficherUtilisateurCleAction
             // Le nom de fichier de log utilisé
             ->addFileHandler('LogUsager.log')
             // On peut passer du texte en paramètre ici qui identifiera
-            // la ligne de log, sinon un UUID sera utilisé
+            // la ligne de log
             ->createLogger('MessageFromEtienne');
     }
 
@@ -35,10 +35,7 @@ final class AfficherUtilisateurCleAction
         $data = $request->getParsedBody();
         $username = (string)($data['username'] ?? '');
         $motdepasse = (string)($data['motdepasse']?? '');
-        // $username = $request->getAttribute('username', '');
-        // $motdepasse = $request->getAttribute('motdepasse', '');
-        $this->logger->debug($data);
-        $this->logger->debug($username . ' - ' . $motdepasse);
+     
         $Usager = $this->AfficherUtilisateur->UtilisateurCleAfficher($username, $motdepasse);
         
 
@@ -50,7 +47,7 @@ final class AfficherUtilisateurCleAction
                 ->withStatus(404);
         }
 
-        $this->logger->info("L'usager dont le nom d'utilisateur est " . $username . "et dont le mot de passe est ". $motdepasse . " a correctement affiché");
+        $this->logger->info("L'usager dont le nom d'utilisateur est " . $username . "et dont le mot de passe est ". $motdepasse . " a correctement affiché sa cle");
         return $response->withHeader('Content-Type', 'application/json')
             ->withStatus(200);
     }

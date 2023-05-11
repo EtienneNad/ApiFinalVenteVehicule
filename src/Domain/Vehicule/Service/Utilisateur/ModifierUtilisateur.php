@@ -44,8 +44,6 @@ final class ModifierUtilisateur
 
     public function UtilisateurModifier(int $id, array $data): array
     {
-        $updateSucceed = false;
-        // Validate if utilisateur exist
         $this->ValidationUtilisateur($id);
         // Validate if all fields are sent
         $this->ValidationUpdateUtilisateurData($data);
@@ -53,15 +51,15 @@ final class ModifierUtilisateur
         // Update utilisateur
         $updateSucceed = $this->repository->ModificationUtilisateur($data);
 
-       // $this->logger->info("L'utilisateur id [{$id}]" . ($updateSucceed ? " a été modifié" : " n'a pu être modifié"));
+       
 
-        return $data;
+        return $updateSucceed;
     }
 
     /**
      * Input validation.
      *
-     * @param array $data The form data
+     * @param int $id  de l'utilisateur
      *
      * @throws RessourceNotFoundException
      *
@@ -70,16 +68,16 @@ final class ModifierUtilisateur
     private function ValidationUtilisateur(int $id): void
     {
         $utilisateur = $this->afficherRepository->SelectUtilisateurId($id);
-
-        //  if (empty($utilisateur)) {
-        //      throw new RessourceNotFoundException("Aucun utilisateur trouvé pour le id {$id}");
-        //  }
+        if (empty($utilisateur)) {
+            throw new RessourceNotFoundException("Aucun vehicule trouvé pour le id {$id}");
+       }
+       
     }
 
     /**
-     * Input validation.
+     *  validation.
      *
-     * @param array $data The form data
+     * @param array $data le formulaire data
      *
      * @throws ValidationException
      *

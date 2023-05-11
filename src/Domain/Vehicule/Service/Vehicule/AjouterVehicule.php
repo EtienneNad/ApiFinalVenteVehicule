@@ -48,7 +48,7 @@ final class AjouterVehicule
     /**
      * Input validation.
      *
-     * @param array $data The form data
+     * @param array $data du formulaire data
      *
      * @throws ValidationException
      *

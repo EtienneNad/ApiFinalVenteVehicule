@@ -6,20 +6,25 @@ use PDO;
  /// Repository.
 class AfficherUtilisateurRepository
 {
-    /**
-     * @var PDO The database connection
+   /**
+     * @var PDO La connexion à la base de données
      */
     private $connection;
     
-     /// Constructor.
-    
      /**
-     * @param PDO $connection The database connection
+     * Constructeur.
+     *
+     * @param PDO $connection La connexion à la base de données
      */
     public function __construct(PDO $connection)
     {
         $this->connection = $connection;
     }
+    /**
+     * Sélectionne tous les utilisateurs de la table.
+     *
+     * @return array Les données des utilisateurs
+     */
     public function SelectToutUtilisateur(): array
     {
         $sql = "SELECT * FROM utilisateurs";
@@ -31,6 +36,14 @@ class AfficherUtilisateurRepository
 
         return $resultat;
     }
+
+    /**
+     * Sélectionne un utilisateur par son identifiant.
+     *
+     * @param int $utilisateurId L'identifiant de l'utilisateur
+     *
+     * @return array Les données de l'utilisateur correspondant
+     */
     public function SelectUtilisateurId(int $utilisateurId): array
     {
         $params = [
@@ -49,7 +62,13 @@ class AfficherUtilisateurRepository
 
         return $resultat;
     }
-
+    /**
+     * Sélectionne le mot de passe hashé d'un utilisateur par son nom d'utilisateur.
+     *
+     * @param string $username Le nom d'utilisateur
+     *
+     * @return string Le mot de passe hashé correspondant
+     */
     public function SelectUtilisateurMotDePasse(string $username): string
     {
         $params = [
@@ -69,6 +88,14 @@ class AfficherUtilisateurRepository
         }
 }
 
+/**
+     * Sélectionne la clé d'authentification d'un utilisateur par son nom d'utilisateur et son mot de passe.
+     *
+     * @param string $username Le nom d'utilisateur
+     * @param string $motdepasse Le mot de passe
+     *
+     * @return array La clé d'authentification de l'utilisateur correspondant
+     */
     public function SelectUtilisateurCle(string $username, string $motdepasse): array
     { 
         

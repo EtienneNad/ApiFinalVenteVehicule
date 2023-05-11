@@ -24,7 +24,7 @@ final class AfficherVehiculeAction
         // Le nom de fichier de log utilisé
         ->addFileHandler('LogAfficherVehicule.log')
         // ON peut passer du texte en paramètre ici qui identifiera
-        // la ligne de log, sinon un UUID sera utilisé
+        // la ligne de log
         ->createLogger('MessageFromAfficherVehicule');
     }
 
@@ -42,7 +42,7 @@ final class AfficherVehiculeAction
                 ->withStatus(404);
         }
         else{
-            $this->logger->info("le tableau d'vehicule a correctement affiché");
+            $this->logger->info("le tableau de vehicule a correctement affiché");
             return $response
                 ->withHeader('Content-Type', 'application/json')
                 ->withStatus(200);

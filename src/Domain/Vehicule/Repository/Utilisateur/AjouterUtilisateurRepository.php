@@ -11,10 +11,10 @@ class AjouterUtilisateurRepository
      */
     private $connection;
     
-     /// Constructor.
-    
      /**
-     * @param PDO $connection The database connection
+     * Constructeur.
+     *
+     * @param PDO $connection La connexion à la base de données
      */
     public function __construct(PDO $connection)
     {
@@ -22,15 +22,14 @@ class AjouterUtilisateurRepository
     }
 
     /**
-     * Insert user row.
+     * Vérifie si un utilisateur existe déjà dans la base de données.
      *
-     * @param array $user The user
-     *
-     * @return int The new ID
+     * @param string $username Le nom d'utilisateur à vérifier
+     * 
+     * @return array Le résultat de la requête de sélection
      */
     public function VerificationUtilisateur(string $username): array
     { 
-            
         
         $params = [
             "username" => $username,
@@ -50,6 +49,13 @@ class AjouterUtilisateurRepository
 
         return $resultat;
     }
+    /**
+     * Insère un utilisateur dans la base de données.
+     *
+     * @param array $utilisateur Le tableau contenant les informations de l'utilisateur à insérer
+     * 
+     * @return int L'identifiant de l'utilisateur inséré
+     */
 
     public function InsererUtilisateur(array $utilisateur): int
     {
